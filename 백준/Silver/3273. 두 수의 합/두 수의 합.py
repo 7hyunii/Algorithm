@@ -3,15 +3,20 @@ input = sys.stdin.readline
 
 n = int(input())
 arr = list(map(int, input().split()))
+arr.sort()
 x = int(input())
 
-arr.sort()
 ans = 0
-for i in range(n):
-    for j in range(i+1, n):
-        if arr[i] + arr[j] == x:
-            ans += 1
-        if arr[i] + arr[j] > x:
-            break
+left, right = 0, n-1
+while left < right:
+    s = arr[left] + arr[right]
+    if s == x:
+        ans += 1
+        left += 1
+        right -= 1
+    elif s < x:
+        left += 1
+    else:
+        right -= 1
 
 print(ans)
