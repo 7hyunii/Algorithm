@@ -1,9 +1,8 @@
 import sys
 input = sys.stdin.readline
-from collections import deque
 
 q = int(input())
-arr = deque()
+arr = []
 
 for _ in range(q):
     query = list(map(int, input().split()))
@@ -15,18 +14,15 @@ for _ in range(q):
     if query[0] == 2:
         n = len(arr)
         mid = n // 2
-
-        arr_list = list(arr)
-        p1 = arr_list[:mid]
-        p2 = arr_list[mid:]
-        s1 = sum(p1)
-        s2 = sum(p2)
+        
+        s1 = sum(arr[:mid])
+        s2 = sum(arr[mid:])
 
         if s1 > s2:
             print(s2)
-            arr = deque(p1)
+            arr = arr[:mid]
         else:
             print(s1)
-            arr = deque(p2) 
+            arr = arr[mid:]
 
 print(*arr)
