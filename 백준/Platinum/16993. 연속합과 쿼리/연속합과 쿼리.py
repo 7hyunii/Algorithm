@@ -27,8 +27,8 @@ for i in range(n-1, 0, -1):
     tree[i] = merge(tree[i<<1], tree[i<<1|1])
 
 def query(l, r):
-    l = l - 1 + n
-    r = r - 1 + n
+    l += n-1
+    r += n-1
 
     leftResult = (0, 0, 0, float('-inf'))
     rightResult = (0, 0, 0, float('-inf'))
