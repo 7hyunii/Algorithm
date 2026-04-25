@@ -1,28 +1,28 @@
 import sys
-input=sys.stdin.readline
+input = sys.stdin.readline
 from collections import defaultdict
 
-Graph = defaultdict(list)
-visited = []
-count = 0
-def DFS(start, end, depth):
-    if start == end:
-        print(depth)
-        quit()
-    visited.append(start)
-    for i in Graph[start]:
-        if i not in visited:
-            DFS(i, end, depth+1)
-
-
 n = int(input())
-a, b = map(int, input().split())
+graph = defaultdict(list)
+s, e = map(int, input().split())
 m = int(input())
 for _ in range(m):
-    x, y = map(int, input().split())
-    Graph[x].append(y)
-    Graph[y].append(x)
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-count = 0
-DFS(a, b, 0)
+visited = set()
+ans = 0
+def dfs(cur, depth):
+    if cur == e:
+        print(depth)
+        sys.exit()
+
+    for nxt in graph[cur]:
+        if nxt not in visited:
+            visited.add(nxt)
+            dfs(nxt, depth+1)
+
+visited.add(s)
+dfs(s, 0)
 print(-1)
